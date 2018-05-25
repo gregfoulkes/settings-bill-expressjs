@@ -6,11 +6,11 @@ module.exports = function() {
   var totalSms = 0.00;
   var costTotal = 0.00;
 
-  var callValue = 0;
-  var smsValue = 0;
+  var callValue = 0.00;
+  var smsValue = 0.00;
 
-  var warnLevel = 0;
-  var critLevel = 0;
+  var warnLevel = 0.00;
+  var critLevel = 0.00;
 
 var billList = []
 
@@ -39,9 +39,10 @@ var billList = []
 
 
   function billItemCalculate(value) {
+    var newDate = new Date()
     let bill = {
       type: value,
-      date: moment.startOf('now').fromNow()
+      date: newDate//moment.fromNow(newDate)
     };
 
     if (value === "call") {
@@ -54,11 +55,6 @@ var billList = []
 
     }
 
-    // if (costTotal >= warnLevel) {
-    //   return 'warning'
-    // } else if (costTotal >= critLevel) {
-    //   return 'danger'
-    // }
     billList.push(bill)
   }
 
@@ -102,10 +98,20 @@ var billList = []
     totalSms = 0.00;
     costTotal = 0.00
 
-  //  billList = {}
+    billList = {}
 
   }
+
+  function filterCall (){
+    return billList.filter(record => record.type == 'call')
+  }
+
+  function filterSms (){
+    return billList.filter(record => record.type == 'sms')
+  }
+
   return {
+
     callSet: callUpdate,
     smsSet: smsUpdate,
 
@@ -125,6 +131,9 @@ var billList = []
     classAdd: addClass,
 
     billList:getBillList,
+
+    callFilter:filterCall,
+    smsFilter:filterSms,
 
   }
 }

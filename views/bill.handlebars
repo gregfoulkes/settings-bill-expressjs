@@ -1,7 +1,22 @@
-{{#each billList}}
+<!-- {{#each billList}}
   <table>
     <tr><td><strong>type:</strong></td><td>{{type}}</td></tr>
     <tr><td><strong>price:</strong></td><td>{{price}}</td></tr>
-    <tr><td><strong>date:</strong></td><td>{{date}}</td></tr>
+    <tr><td><strong>date:</strong></td><td>{{changedDate}}</td></tr>
   </table>
-{{/each}}
+{{/each}} -->
+<div class="container center">
+  <div class="row">
+    <h1 >Phone Bill</h1>
+    {{#each billList}}
+      <table>
+        <tr><td><strong>type:</strong></td><td>{{type}}</td>
+        <td><strong>price:</strong></td><td>{{price}}</td>
+        <td><strong>date:</strong></td><td>{{changedDate}}</td></tr>
+      </table>
+    {{/each}}
+
+
+  </div>
+
+</div>

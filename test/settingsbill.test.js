@@ -17,7 +17,7 @@ describe('billList return', function() {
 
       {
         type: 'call',
-        date: 'a few seconds ago',
+        date: 'a few seconds',
         price: 4
 ,
       },
