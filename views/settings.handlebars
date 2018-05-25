@@ -51,11 +51,13 @@
                       <td>
                         <a href="/actions">Total</a>
                       </td>
-                      <td> R<span class="{{classAdd}} totalSettings">{{theTotal}}</span> </td>
+                      <td> R<span class="{{class}} totalSettings">{{theTotal}}</span> </td>
                     </tr>
                   </table>
 
             </div>
+
+
             <div class="six columns">
               <h5>Settings</h5>
 
@@ -70,8 +72,22 @@
                 <input class="u-full-width criticalLevelSetting" type="number" placeholder="eg. 65.00" >
                 <button class="button-primary updateSettings" type="submit" name="button">Update settings</button>
               </form>
-              <button class="button-primary updateSettings" type="submit"  href = "/reload" >Reload</button>
+                <a href="/reload"><button class="button-primary updateSettings" type="submit"  >Reload</button></a>
 
+
+            </div>
+
+            <div class="six colums">
+
+            <a href="/bill">Bill</a>
+
+            <!-- {{#each billList}}
+              <table>
+                <tr><td><strong>type:</strong></td><td>{{type}}</td></tr>
+                <tr><td><strong>price:</strong></td><td>{{price}}</td></tr>
+                <tr><td><strong>date:</strong></td><td>{{date}}</td></tr>
+              </table>
+            {{/each}} -->
 
             </div>
           </div>

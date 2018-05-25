@@ -30,37 +30,23 @@ app.set('view engine', 'handlebars');
 app.get('/', function (req, res) {
 
 
-  var initialData = {
-     callTotal: 0.00,
-     smsTotal:0.00,
-     theTotal: 0.00
-  }
-    res.render('settings', initialData);
-});
-
-app.get('/reload', function (req, res) {
-  settings.reset()
   var callData = {
      callTotal:settings.call(),
      smsTotal: settings.sms(),
-     theTotal: settings.total()
+     theTotal: settings.total(),
+     class: settings.classAdd()
+
   }
 
     res.render('settings', callData);
 });
+
+
 
 app.post('/calculate', function (req, res) {
     var billType = req.body.getBillType;
     settings.calculate(billType)
-
-    var callData = {
-       callTotal:settings.call(),
-       smsTotal: settings.sms(),
-       theTotal: settings.total(),
-       classAdd: settings.classAdd()
-    }
-
-    res.render('settings', callData);
+    res.redirect('/')
 });
 
 app.post('/update', function (req, res) {
@@ -70,16 +56,26 @@ app.post('/update', function (req, res) {
     var warningValue = req.body.getWarningValue
 
     settings.callSet(callValue)
-    settings.smsSet(callValue)
+    settings.smsSet(smsValue)
     settings.getCritical(criticalValue)
     settings.getWarning(warningValue)
 
-      var callData = {
-         callTotal:settings.call(),
-         smsTotal: settings.sms(),
-         theTotal: settings.total()
-      }
+    res.redirect('/')
+});
 
+app.get('/bill', function (req, res) {
+    var bill = {billList:settings.billList()}
+    console.log(bill)
+    res.render('bill', bill)
+});
 
-res.render('settings', callData);
+app.get('/reload', function (req, res) {
+  settings.reset()
+  var callData = {
+     callTotal:settings.call(),
+     smsTotal: settings.sms(),
+     theTotal: settings.total()
+  }
+    res.render('settings', callData);
+
 });
