@@ -62,8 +62,6 @@ app.get('/', function(req, res) {
 app.post('/calculate', function(req, res) {
   var billType = req.body.getBillType;
   settings.calculate(billType)
-
-
   res.redirect('/')
 });
 
@@ -85,25 +83,26 @@ app.get('/bill', function(req, res) {
   var bill = {
     billList: settings.billList()
   }
-  console.log(bill)
+//  console.log(bill)
   res.render('bill', bill)
 });
 
-app.get('/bill/:call', function(req, res){
+app.get('/actions/:type', function(req, res){
+  let type = req.params.type
 
-  var filteredCalls = settings.callFilter()
+  if(type == 'call' || type == 'sms'){
 
-  res.render('bill', {billList:filteredCalls} )
+    var filteredLogs = settings.recordFilter(type)
+
+    res.render('bill', {billList:filteredLogs} )
+
+  }else if(type == 'allRecords'){
+    res.render('bill', {billList: settings.billList()} )
+
+  }
 
 });
 
-app.get('/bill/:sms', function(req, res){
-
-  var filteredSms = settings.smsFilter()
-
-  res.render('bill', {billList:filteredSms} )
-
-});
 
 app.get('/reload', function(req, res) {
   settings.reset()
@@ -112,6 +111,8 @@ app.get('/reload', function(req, res) {
     smsTotal: settings.sms(),
     theTotal: settings.total()
   }
-  res.render('settings', callData);
+  //res.render('settings', callData);
+  res.redirect('/');
+
 
 });

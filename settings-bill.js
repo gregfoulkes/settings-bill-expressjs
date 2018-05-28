@@ -15,13 +15,18 @@ module.exports = function() {
 var billList = []
 
   function callUpdate(value) {
-    callValue = parseFloat(value)
+    if(value != ""){
+      callValue = parseFloat(value)
+    }
     return callValue
   }
 
   function smsUpdate(value) {
-    smsValue = parseFloat(value)
+    if(value != ''){
+      smsValue = parseFloat(value)
+    }
     return smsValue
+
   }
 
   function warningLevelUpdate(value) {
@@ -98,17 +103,21 @@ var billList = []
     totalSms = 0.00;
     costTotal = 0.00
 
-    billList = {}
+  //  billList = {}
 
   }
 
-  function filterCall (){
-    return billList.filter(record => record.type == 'call')
+  function filterRecords (type){
+    return billList.filter(record => record.type === type)
   }
 
-  function filterSms (){
-    return billList.filter(record => record.type == 'sms')
-  }
+  // function filterCall (){
+  //   return billList.filter(record => record.type == 'call')
+  // }
+  //
+  // function filterSms (){
+  //   return billList.filter(record => record.type == 'sms')
+  // }
 
   return {
 
@@ -132,8 +141,9 @@ var billList = []
 
     billList:getBillList,
 
-    callFilter:filterCall,
-    smsFilter:filterSms,
+    recordFilter:filterRecords,
+    // callFilter:filterCall,
+    // smsFilter:filterSms,
 
   }
 }
