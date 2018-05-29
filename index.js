@@ -50,11 +50,18 @@ app.get('/', function(req, res) {
     callTotal: settings.call(),
     smsTotal: settings.sms(),
     theTotal: settings.total(),
-    classAdd: settings.classAdd()
+    classAdd: settings.classAdd(),
 
   }
-  console.log(callData)
-  res.render('settings', callData);
+
+  var updatedValues = {
+    callValue: settings.callGet(),
+    smsValue: settings.smsGet(),
+    warning: settings.getWarning(),
+    critical: settings.getCritical()
+}
+  console.log(updatedValues)
+  res.render('settings', {callData, updatedValues});
 });
 
 
@@ -62,7 +69,24 @@ app.get('/', function(req, res) {
 app.post('/calculate', function(req, res) {
   var billType = req.body.getBillType;
   settings.calculate(billType)
-  res.redirect('/')
+
+  var callData = {
+    callTotal: settings.call(),
+    smsTotal: settings.sms(),
+    theTotal: settings.total(),
+    classAdd: settings.classAdd(),
+
+  }
+
+  var updatedValues = {
+    callValue: settings.callGet(),
+    smsValue: settings.smsGet(),
+    warning: settings.getWarning(),
+    critical: settings.getCritical()
+}
+//  console.log(callData)
+  res.render('settings', {callData, updatedValues});
+//  res.redirect('/')
 });
 
 app.post('/update', function(req, res) {
@@ -71,14 +95,14 @@ app.post('/update', function(req, res) {
   var criticalValue = req.body.getCriticalValue;
   var warningValue = req.body.getWarningValue
 
-  console.log(criticalValue)
-  console.log(warningValue)
+//  console.log(criticalValue)
+//  console.log(warningValue)
 
 
   settings.callSet(callValue)
   settings.smsSet(smsValue)
-  settings.getCritical(criticalValue)
-  settings.getWarning(warningValue)
+  settings.updateCritical(criticalValue)
+  settings.updateWarning(warningValue)
 
   res.redirect('/')
 });

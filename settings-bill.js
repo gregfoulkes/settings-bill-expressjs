@@ -9,8 +9,8 @@ module.exports = function() {
   var callValue = 0.00;
   var smsValue = 0.00;
 
-  var warnLevel = 0.00;
-  var critLevel = 0.00;
+  var warnLevel = 0;
+  var critLevel = 0;
 
 var billList = []
 
@@ -18,27 +18,32 @@ var billList = []
     if(value != ""){
       callValue = parseFloat(value)
     }
-    return callValue
+  //  return callValue
   }
 
   function smsUpdate(value) {
     if(value != ''){
       smsValue = parseFloat(value)
     }
-    return smsValue
+  //  return smsValue
 
+  }
+  function getCallValue(){
+    return callValue.toFixed(2)
+  }
+
+  function getSmsValue(){
+    return smsValue.toFixed(2)
   }
 
   function warningLevelUpdate(value) {
     warnLevel = parseFloat(value)
-  //  return warnLevel
   }
 
 
 
   function criticalLevelUpdate(value) {
     critLevel = parseFloat(value)
-  //  return critLevel
   }
 
 
@@ -61,7 +66,6 @@ var billList = []
 
     }
 
-
     billList.push(bill)
   }
 
@@ -83,7 +87,8 @@ var billList = []
   }
 
   function totalFunction() {
-    var costTotal = totalCalls + totalSms;
+    costTotal = totalCalls + totalSms;
+
     return costTotal.toFixed(2);
   }
 
@@ -111,11 +116,12 @@ var billList = []
 
   }
 
-  function totalsReturns() {
+  function valuesReturn() {
     {
-      totalCalls,
-      totalSms,
-      costTotal
+      callValue,
+      smsValue,
+      warnLevel,
+      critLevel
     //  billList = {}
 
     }
@@ -132,12 +138,17 @@ var billList = []
     callSet: callUpdate,
     smsSet: smsUpdate,
 
+    callGet: getCallValue,
+    smsGet: getSmsValue,
+
+
+
     calculate: billItemCalculate,
 
     call: allCalls,
     sms: allSms,
     total: totalFunction,
-    returnTotal:totalsReturns,
+    returnValues:valuesReturn,
     reset: totalsReset,
 
     updateWarning: warningLevelUpdate,
