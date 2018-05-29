@@ -55,7 +55,11 @@ var billList = []
       date: newDate//moment.fromNow(newDate)
     };
 
-  //  if(!totalCalls > 0 && !totalSms > 0){
+    if(costTotal > critLevel){
+      return
+    }
+
+  // if(!totalCalls > 0 && !totalSms > 0){
       if (value === "call") {
         totalCalls += callValue;
         bill.price = callValue;
