@@ -56,6 +56,8 @@ var billList = []
     };
 
     if(costTotal > critLevel){
+      var diff = costTotal - critLevel
+      costTotal -= diff
       return
     }
 
@@ -114,9 +116,14 @@ var billList = []
 
     totalCalls = 0.00;
     totalSms = 0.00;
-    costTotal = 0.00
+    costTotal = 0.00;
 
-  //  billList = {}
+    callValue = 0.00;
+    smsValue = 0.00;
+    warnLevel = 0;
+    critLevel = 0;
+
+    billList = []
 
   }
 
