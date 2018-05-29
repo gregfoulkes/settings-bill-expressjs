@@ -31,14 +31,14 @@ var billList = []
 
   function warningLevelUpdate(value) {
     warnLevel = parseFloat(value)
-    return warnLevel
+  //  return warnLevel
   }
 
 
 
   function criticalLevelUpdate(value) {
     critLevel = parseFloat(value)
-    return critLevel
+  //  return critLevel
   }
 
 
@@ -50,15 +50,17 @@ var billList = []
       date: newDate//moment.fromNow(newDate)
     };
 
-    if (value === "call") {
-      totalCalls += callValue;
-      bill.price = callValue;
-    } else if (value === "sms") {
-      totalSms += smsValue;
-      bill.price = smsValue;
-
+  //  if(!totalCalls > 0 && !totalSms > 0){
+      if (value === "call") {
+        totalCalls += callValue;
+        bill.price = callValue;
+      } else if (value === "sms") {
+        totalSms += smsValue;
+        bill.price = smsValue;
+      //}
 
     }
+
 
     billList.push(bill)
   }
@@ -90,11 +92,13 @@ var billList = []
   }
 
   function addClass() {
-    if (costTotal > warnLevel && costTotal < critLevel ) {
-      return 'warning'
-    } else if (costTotal > critLevel) {
+    if (costTotal > critLevel) {
       return 'danger'
+    } else if (costTotal > warnLevel) {
+      return 'warning'
     }
+
+
   }
 
   function totalsReset() {
@@ -107,17 +111,21 @@ var billList = []
 
   }
 
+  function totalsReturns() {
+    {
+      totalCalls,
+      totalSms,
+      costTotal
+    //  billList = {}
+
+    }
+
+  }
+
   function filterRecords (type){
     return billList.filter(record => record.type === type)
   }
 
-  // function filterCall (){
-  //   return billList.filter(record => record.type == 'call')
-  // }
-  //
-  // function filterSms (){
-  //   return billList.filter(record => record.type == 'sms')
-  // }
 
   return {
 
@@ -129,6 +137,7 @@ var billList = []
     call: allCalls,
     sms: allSms,
     total: totalFunction,
+    returnTotal:totalsReturns,
     reset: totalsReset,
 
     updateWarning: warningLevelUpdate,
@@ -142,8 +151,6 @@ var billList = []
     billList:getBillList,
 
     recordFilter:filterRecords,
-    // callFilter:filterCall,
-    // smsFilter:filterSms,
 
   }
 }

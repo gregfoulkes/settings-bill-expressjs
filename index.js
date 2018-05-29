@@ -53,7 +53,7 @@ app.get('/', function(req, res) {
     classAdd: settings.classAdd()
 
   }
-
+  console.log(callData)
   res.render('settings', callData);
 });
 
@@ -70,6 +70,10 @@ app.post('/update', function(req, res) {
   var smsValue = req.body.getSmsValue;
   var criticalValue = req.body.getCriticalValue;
   var warningValue = req.body.getWarningValue
+
+  console.log(criticalValue)
+  console.log(warningValue)
+
 
   settings.callSet(callValue)
   settings.smsSet(smsValue)
