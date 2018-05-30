@@ -65,12 +65,15 @@ var billList = []
       if (value === "call") {
         totalCalls += callValue;
         bill.price = callValue;
+
       } else if (value === "sms") {
         totalSms += smsValue;
         bill.price = smsValue;
       //}
 
+
     }
+    costTotal = totalCalls + totalSms;
 
     billList.push(bill)
   }
@@ -93,8 +96,8 @@ var billList = []
   }
 
   function totalFunction() {
-    costTotal = totalCalls + totalSms;
-
+  //  costTotal = totalCalls + totalSms;
+    console.log(costTotal)
     return costTotal.toFixed(2);
   }
 
@@ -103,6 +106,7 @@ var billList = []
   }
 
   function addClass() {
+    console.log(costTotal)
     if (costTotal > critLevel) {
       return 'danger'
     } else if (costTotal > warnLevel) {
