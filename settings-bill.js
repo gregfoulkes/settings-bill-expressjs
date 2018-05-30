@@ -56,22 +56,18 @@ var billList = []
     };
 
     if(costTotal > critLevel){
-      var diff = costTotal - critLevel
-      costTotal -= diff
+
       return
     }
-
   // if(!totalCalls > 0 && !totalSms > 0){
       if (value === "call") {
         totalCalls += callValue;
-        bill.price = callValue;
+        bill.price = callValue.toFixed(2);
 
       } else if (value === "sms") {
         totalSms += smsValue;
-        bill.price = smsValue;
+        bill.price = smsValue.toFixed(2);
       //}
-
-
     }
     costTotal = totalCalls + totalSms;
 
@@ -97,7 +93,6 @@ var billList = []
 
   function totalFunction() {
   //  costTotal = totalCalls + totalSms;
-    console.log(costTotal)
     return costTotal.toFixed(2);
   }
 
@@ -106,12 +101,20 @@ var billList = []
   }
 
   function addClass() {
-    console.log(costTotal)
-    if (costTotal > critLevel) {
+    var diff = costTotal - critLevel
+  if(costTotal != 0){
+    if (costTotal >= critLevel) {
+      costTotal -= diff
+
       return 'danger'
-    } else if (costTotal > warnLevel) {
+    } else if (costTotal >= warnLevel) {
       return 'warning'
     }
+
+return
+
+  }
+
 
 
   }
